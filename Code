@@ -1,0 +1,79 @@
+#OriginalCode
+library(data.table)
+library(ggplot2)
+setwd("/Users/mhpet/Desktop/FinalProject")
+Bat <- fread("Bat.csv")
+Pitch <- fread("Pitch.csv")
+Relieve <- fread("Relieve.csv")
+setnames(Bat, "1B", "Singles")
+setnames(Bat, "2B", "Doubles")
+setnames(Bat, "3B", "Triples")
+Bat$TotalBases <- Bat$Singles + Bat$Doubles*2 + Bat$Triples*3 + Bat$HR*4
+Bat$Points <- Bat$TotalBases + Bat$BB + Bat$R + Bat$RBI - Bat$SO + Bat$HBP + Bat$SB
+Bat$PointsPerGame <- Bat$Points/Bat$G
+BatPointsBySeason <- ggplot(Bat, aes(x=Season, y=Points)) + geom_point() + labs(title = "Batting Points by Season", caption = "Batting points have been relatively stable over the years except for slight spikes in the 1930s and 2000s.")
+AllPitch <- merge(Pitch, Relieve, all=T)
+AllPitch$Points <- AllPitch$IP*3-AllPitch$ER*2+AllPitch$W*5-AllPitch$L*5+AllPitch$SV*5+AllPitch$SO-AllPitch$H-AllPitch$BB
+PitchPointsBySeason <- ggplot(Pitch, aes(x=Season, y=Points)) + geom_point() + labs(title = "Starting Pitching Points by Season", caption = "Starting pitching points have increased over the years")
+Relieve$Points <- Relieve$IP*3-Relieve$ER*2+Relieve$W*5-Relieve$L*5+Relieve$SV*5+Relieve$SO-Relieve$H-Relieve$BB
+RelievePointsBySeason <- ggplot(Relieve, aes(x=Season, y=Points)) + geom_point() + labs(title = "Relief Pitching Points by Season", caption = "Relief pitching points have increased over the years")
+PiratesBat<-subset(Bat, Team=="Pirates")
+write.csv(Bat, "BattingPoints.csv")
+write.csv(Pitch, "StartingPitchingPoints.csv")
+write.csv(Relieve, "ReliefPitchingStats.csv")
+write.csv(PiratesBat, "PiratesBattingPoints.csv")
+
+#CodeWithFunctions
+getLibraries <- function(library1, library2){
+library(library1)
+library(library2)
+}
+
+importData <- function(BattingData, PitcherData, RelieverData){
+Bat <- fread("BattingData")
+Pitch <- fread("PitcherData")
+Relieve <- fread("RelieverData")
+}
+
+battingVariables <- function(){
+setnames(Bat, "1B", "Singles")
+setnames(Bat, "2B", "Doubles")
+setnames(Bat, "3B", "Triples")
+Bat$TotalBases <- Bat$Singles + Bat$Doubles*2 + Bat$Triples*3 + Bat$HR*4
+Bat$Points <- Bat$TotalBases + Bat$BB + Bat$R + Bat$RBI - Bat$SO + Bat$HBP + Bat$SB
+Bat$PointsPerGame <- Bat$Points/Bat$G
+}
+
+pitchingVariables <- function(){
+AllPitch <- merge(Pitch, Relieve, all=T)
+AllPitch$Points <- AllPitch$IP*3-AllPitch$ER*2+AllPitch$W*5-AllPitch$L*5+AllPitch$SV*5+AllPitch$SO-AllPitch$H-AllPitch$BB
+Relieve$Points <- Relieve$IP*3-Relieve$ER*2+Relieve$W*5-Relieve$L*5+Relieve$SV*5+Relieve$SO-Relieve$H-Relieve$BB
+}
+
+subsetTeam <- function(newTable, oldTable, team){
+newTable <- subset(oldTable, Team=="team")
+}
+
+graphing <- function(){
+BatPointsBySeason <- ggplot(Bat, aes(x=Season, y=Points)) + geom_point() + labs(title = "Batting Points by Season", caption = "Batting points have been relatively stable over the years except for slight spikes in the 1930s and 2000s.")
+PitchPointsBySeason <- ggplot(Pitch, aes(x=Season, y=Points)) + geom_point() + labs(title = "Starting Pitching Points by Season", caption = "Starting pitching points have increased over the years")
+RelievePointsBySeason <- ggplot(Relieve, aes(x=Season, y=Points)) + geom_point() + labs(title = "Relief Pitching Points by Season", caption = "Relief pitching points have increased over the years")
+}
+
+writingFiles <- function(){
+write.csv(Bat, "BattingPoints.csv")
+write.csv(Pitch, "StartingPitchingPoints.csv")
+write.csv(Relieve, "ReliefPitchingStats.csv")
+write.csv(PiratesBat, "PiratesBattingPoints.csv")
+}
+
+mainFunction <- function(){
+getLibraries(data.table, ggplot2)
+setwd("YourDirectoryGoesHere")
+importData("YourBattingData", "YourPitcherData", "YourRelieverData")
+battingVariables()
+subsetTeam(PiratesBat, Bat, Pirates)
+graphing()
+writingFiles()
+}
+
