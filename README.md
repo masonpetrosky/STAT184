@@ -10,3 +10,4 @@ You made a new tidy table - 5/5 because I created the Pirates table which was a 
 You used 3 plots to support your analysis - 15/15 because I created a plot for each original table vs time. The graphs are the PDFs that I have uploaded.
 You have documented your code in Github - 10/10 because it's in here.
 You have organized all your code into functions - 15/15 because my code is all within functions, but I also provided the original code in case there is any confusion.
+Your project incorporates a statistical analysis or machine learning - 20/20 because this project is entirely an analysis of previous baseball statistics and converting them into points for fantasy baseball.
