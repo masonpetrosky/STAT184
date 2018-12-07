@@ -7,6 +7,6 @@ Your data is complicated - 5/5 because the data contained the batters, starting 
 You calculated new variables - 10/10 because I calculated points, points per game, and total bases.
 You merged data from separate tables - 5/5 because I merged the original tables.
 You made a new tidy table - 5/5 because I created the Pirates table which was a new table with a different level of organization than the original table, similar to the Flights dataset we used in class.
-You used 3 plots to support your analysis - 15/15 because I created a plot for each original table vs time.
+You used 3 plots to support your analysis - 15/15 because I created a plot for each original table vs time. The graphs are the PDFs that I have uploaded.
 You have documented your code in Github - 10/10 because it's in here.
 You have organized all your code into functions - 15/15 because my code is all within functions, but I also provided the original code in case there is any confusion.
