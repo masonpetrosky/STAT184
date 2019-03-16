@@ -1,7 +1,7 @@
 #OriginalCode
 library(data.table)
 library(ggplot2)
-setwd("/Users/mhpet/Desktop/FinalProject")
+setwd("/Users/mhpet/Desktop/HackPSU")
 Bat <- fread("Bat.csv")
 Pitch <- fread("Pitch.csv")
 Relieve <- fread("Relieve.csv")
